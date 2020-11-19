@@ -1,28 +1,29 @@
-import React, { useState } from "react";
 import Button from "../Button/Button";
+import React from "react";
 
 const AddUserForm = ({ addUserHandler }) => {
-    const [user, handleUser] = useState({});
+    const handleSubmit = e => {
+        e.preventDefault();
+        const { elements } = e.target.form;
 
-    const handleInput = (e) => {
-        const { name, value } = e.target;
-        const res = {
-            [name]: value,
-            ...user
-        };
-        return handleUser(res);
-    };
-
-    const btnClickHandler = () => {
-        console.log(user);
-        addUserHandler(user);
+        addUserHandler({
+            'name': elements.name.value,
+            'username': elements.username.value,
+            'email': elements.email.value,
+            'phone': elements.phone.value
+        });
     };
 
     return <div className="UserForm">
         <div className="FormWrapper">
-            <input name="name" type="text" placeholder="Name" onKeyUp={e => handleInput(e)}/>
+            <form name="userForm">
+                <input name="name" type="text" placeholder="Name"/>
+                <input name="username" type="text" placeholder="Username"/>
+                <input name="email" type="text" placeholder="Email"/>
+                <input name="phone" type="text" placeholder="Phone"/>
+                <Button type="submit" className="AddUser" clickHandler={e => handleSubmit(e)}>Add</Button>
+            </form>
         </div>
-        <Button className="AddUser" clickHandler={btnClickHandler}>Add</Button>
     </div>
 };
 
