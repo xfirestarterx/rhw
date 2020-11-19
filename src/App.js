@@ -1,27 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
 import './App.css';
-import Card from "./components/Card/Card";
 import Modal from "./components/Modal/Modal";
-import { users } from './data/users';
 import Button from "./components/Button/Button";
+import CardsContainer from "./components/CardsContainer/CardsContainer";
 
 const App = () => {
-  const [ isModalShown, invertModalState ] = useState(true);
+  const [ isModalShown, invertModalState ] = useState(false);
+  const preventScrollClass = 'prevent-scroll';
+  const bodyClasses = document.body.classList;
 
-  const modalHandler = () => invertModalState(!isModalShown);
+  const modalHandler = () => {
+      invertModalState(!isModalShown);
+      isModalShown ? bodyClasses.remove(preventScrollClass) : bodyClasses.add(preventScrollClass);
+  };
 
   return (
     <div className="App">
-      <Button clickHandler={modalHandler}>Button some</Button>
+        <header>
+            <Button clickHandler={modalHandler}>Add new user</Button>
+        </header>
 
-      {
-        users.map((user, idx) =>
-          <Card key={user.id} user={user} />
-        )
-      }
+        <CardsContainer/>
 
-      { isModalShown && <Modal/> }
+        { isModalShown && <Modal closeHandler={modalHandler}/> }
     </div>
   );
 };

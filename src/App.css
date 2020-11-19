@@ -1,7 +1,9 @@
+.prevent-scroll {
+    overflow-y: hidden;
+}
+
 .App {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 65vw;
-  margin: 0 auto;
+    max-width: 65vw;
+    margin: 0 auto;
+    padding: 35px 0 15px;
 }

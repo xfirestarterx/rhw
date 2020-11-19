@@ -2,7 +2,7 @@ import React from 'react';
 import './Card.css';
 
 const Card = ({user}) => {
-    console.log(user)
+    // console.log(user)
 
     const {
         id,
