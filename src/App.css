@@ -1,3 +1,7 @@
+body {
+    background-color: #f4f4f4;
+}
+
 .prevent-scroll {
     overflow-y: hidden;
 }
@@ -6,4 +10,10 @@
     max-width: 65vw;
     margin: 0 auto;
     padding: 35px 0 15px;
+    color: #676767;
+}
+
+i {
+    font-style: normal;
+    color: #000;
 }
