@@ -9,7 +9,7 @@ import {users} from "./data/users";
 const App = () => {
     const [usersList, handleUsers] = useState(users);
     const deleteUserHandler = userId => handleUsers(usersList.filter((user, i) => user.id != userId));
-    const addUserHandler = () => handleUsers([{id: Math.random()}, ...usersList]);
+    const addUserHandler = user => handleUsers([{id: Math.random(), ...user}, ...usersList]);
 
     const [ isModalShown, invertModalState ] = useState(false);
     const preventScrollClass = 'prevent-scroll';

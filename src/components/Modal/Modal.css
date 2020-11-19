@@ -6,6 +6,9 @@
     height: 100vh;
     z-index: 1;
     background: rgba(0,0,0, .7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ModalContainer .Button {
@@ -14,4 +17,8 @@
     position: absolute;
     top: 25px;
     right: 25px;
+}
+
+.ModalContainer .Button.AddUser {
+    position: static;
 }
