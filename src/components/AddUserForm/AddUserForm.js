@@ -1,5 +1,7 @@
 import Button from "../Button/Button";
 import React from "react";
+import FormRow from "../FormRow/FormRow";
+import './AddUserForm.css';
 
 const AddUserForm = ({ addUserHandler }) => {
     const handleSubmit = e => {
@@ -12,15 +14,17 @@ const AddUserForm = ({ addUserHandler }) => {
             'email': elements.email.value,
             'phone': elements.phone.value
         });
+
+        e.target.form.reset();
     };
 
     return <div className="UserForm">
         <div className="FormWrapper">
             <form name="userForm">
-                <input name="name" type="text" placeholder="Name"/>
-                <input name="username" type="text" placeholder="Username"/>
-                <input name="email" type="text" placeholder="Email"/>
-                <input name="phone" type="text" placeholder="Phone"/>
+                <FormRow name="name" type="text" placeholder="Name"/>
+                <FormRow name="username" type="text" placeholder="Username"/>
+                <FormRow name="email" type="text" placeholder="Email"/>
+                <FormRow name="phone" type="text" placeholder="Phone"/>
                 <Button type="submit" className="AddUser" clickHandler={e => handleSubmit(e)}>Add</Button>
             </form>
         </div>
