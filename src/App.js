@@ -4,33 +4,34 @@ import './App.css';
 import Modal from "./components/Modal/Modal";
 import Button from "./components/Button/Button";
 import CardsContainer from "./components/CardsContainer/CardsContainer";
-import {users} from "./data/users";
 
-const App = () => {
-    const [usersList, handleUsers] = useState(users);
-    const deleteUserHandler = userId => handleUsers(usersList.filter((user, i) => user.id != userId));
-    const addUserHandler = user => handleUsers([{id: Math.random(), ...user}, ...usersList]);
-
-    const [ isModalShown, invertModalState ] = useState(false);
-    const preventScrollClass = 'prevent-scroll';
-    const bodyClasses = document.body.classList;
-
-  const modalHandler = () => {
-      invertModalState(!isModalShown);
-      isModalShown ? bodyClasses.remove(preventScrollClass) : bodyClasses.add(preventScrollClass);
+class App extends React.Component {
+  state = {
+    isDataLoaded: false,
+    users: [],
+    posts: []
   };
 
-  return (
-    <div className="App">
-        <header>
-            <Button clickHandler={modalHandler}>Add new user</Button>
-        </header>
+  render() {
+    return(
+      <div>{this.state.isDataLoaded ? 'loaded' : 'Loading'}</div>
+    )
+  }
 
-        <CardsContainer usersList={usersList} deleteUserHandler={deleteUserHandler}/>
+  async fetchData(url) {
+    return await fetch(url).then(response => response.json());
+  }
 
-        { isModalShown && <Modal closeHandler={modalHandler} addUserHandler={addUserHandler}/> }
-    </div>
-  );
-};
+  async componentDidMount() {
+    const users = await this.fetchData('https://jsonplaceholder.typicode.com/users');
+    const posts = await this.fetchData('https://jsonplaceholder.typicode.com/posts');
+
+    this.setState({
+      isDataLoaded: true,
+      users,
+      posts
+    });
+  }
+}
 
 export default App;
