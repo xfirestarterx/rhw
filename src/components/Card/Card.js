@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.css';
-import Button from "../Button/Button";
+import { Link } from 'react-router-dom';
 
 const getVal = val => val || '-';
 
@@ -47,12 +47,13 @@ const CardFooter = ({ user: { address = {}, company ={} } }) => {
     );
 };
 
-const Card = ({user, deleteHandler}) => {
+const Card = ({user}) => {
     return (
         <div className="Card">
-            <CardRecord user={user} />
-            <CardFooter user={user} />
-            <Button clickHandler={() => deleteHandler(user.id)}>Delete</Button>
+            <Link to={`/user/${user.id}`}>
+                <CardRecord user={user} />
+                <CardFooter user={user} />
+            </Link>
         </div>
     );
 };

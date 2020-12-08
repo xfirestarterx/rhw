@@ -1,9 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Modal from "./components/Modal/Modal";
-import Button from "./components/Button/Button";
-import CardsContainer from "./components/CardsContainer/CardsContainer";
+import Card from './components/Card/Card';
+import User from './components/User/User';
 
 class App extends React.Component {
   state = {
@@ -13,8 +12,25 @@ class App extends React.Component {
   };
 
   render() {
+    const { isDataLoaded, users, posts } = this.state;
+
     return(
-      <div>{this.state.isDataLoaded ? 'loaded' : 'Loading'}</div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/'>
+            { isDataLoaded ?
+            <div className="CardsContainer">
+              {users.map(user =>
+                  <Card key={user.id} user={user} />
+              )}
+            </div> : 'Loading...' }
+          </Route>
+
+          <Route path='/user/:id'>
+            <User posts={posts} users={users} isDataLoaded={isDataLoaded}/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     )
   }
 
