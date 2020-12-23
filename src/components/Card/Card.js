@@ -1,6 +1,7 @@
 import React from 'react';
 import './Card.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const getVal = val => val || '-';
 
@@ -22,6 +23,16 @@ const CardRecord = ({ user }) => {
           <div><i>Website:</i> {getVal(website)}</div>
       </div>
     );
+};
+
+CardRecord.propTypes = {
+    user: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string,
+        username: PropTypes.string,
+        phone: PropTypes.string,
+        website: PropTypes.string
+    })
 };
 
 const CardFooter = ({ user: { address = {}, company ={} } }) => {
@@ -47,7 +58,23 @@ const CardFooter = ({ user: { address = {}, company ={} } }) => {
     );
 };
 
-const Card = ({user}) => {
+CardFooter.propTypes = {
+    user: PropTypes.shape({
+        address: PropTypes.shape({
+            street: PropTypes.string,
+            suite: PropTypes.string,
+            city: PropTypes.string,
+            zipcode: PropTypes.string
+        }),
+        company: PropTypes.shape({
+            name: PropTypes.string,
+            catchPhrase: PropTypes.string,
+            bs: PropTypes.string
+        })
+    })
+};
+
+const Card = ({ user }) => {
     return (
         <div className="Card">
             <Link to={`/user/${user.id}`}>
@@ -56,6 +83,17 @@ const Card = ({user}) => {
             </Link>
         </div>
     );
+};
+
+Card.propTypes = {
+    user: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        email: PropTypes.string,
+        username: PropTypes.string,
+        phone: PropTypes.string,
+        website: PropTypes.string
+    })
 };
 
 export  default  Card;
