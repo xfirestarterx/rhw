@@ -1,0 +1,11 @@
+.Rating {
+    margin-top: 10px;
+}
+
+.Rating span {
+    display: inline-block;
+}
+
+.Rating span:first-child {
+    margin-right: 10px;
+}
