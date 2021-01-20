@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import CardsWraper from './components/CardsWrapper/CardsWrapper';
 import MapWrapper from './components/MapWrapper/MapWrapper';
-import { url , options } from './request/request';
-
+import MainContextProvider from './context/MainContextProvider';
 const App = () => {
   const [ isLoaded, updateIsLoaded ] = useState(false);
-  const [ data, updateData ] = useState([]);
-
-  const fetchData = () => {
-    fetch(url, options)
-      .then(data => data.json())
-      .then(json => {
-        updateData(json?.data?.body?.searchResults?.results ?? []);
-        updateIsLoaded(true);
-      })
-      .catch((error) => console.log(error))
-  };
-
-  useEffect(fetchData, []);
 
   return (
     <>
       { !isLoaded && <div>loading</div> }
 
-      <div className="MainContainer">
-        <CardsWraper />
-        <MapWrapper />
-      </div>
+      <MainContextProvider updateIsLoaded={updateIsLoaded}>
+        <div className="MainContainer">
+          <CardsWraper />
+          <MapWrapper />
+        </div>
+      </MainContextProvider>
     </>
   );
 };

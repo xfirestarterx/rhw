@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MainContext } from '../../context/MainContextProvider';
 import Card from '../Card/Card';
 
 const CardsWrapper = () => {
+    const data = useContext(MainContext);
+
     return (
         <div className="CardsWrapper Wrapper">
-            <Card />
+            cards wrapper
+            {
+                data.map(el => {
+                    <Card />
+                })
+            }
         </div>
     )
 }
