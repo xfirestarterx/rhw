@@ -1,8 +1,15 @@
 import React from 'react';
+import Subtitle from '../Subtitle/Subtitle';
+import Title from '../Title/Title';
 
-const Card = () => {
+const Card = ({ item }) => {
+    const { address, name } = item;
+
     return (
-        <div>card</div>
+        <div className="Card">
+            <Subtitle address={address} />
+            <Title name={name} />
+        </div>
     );
 }
 

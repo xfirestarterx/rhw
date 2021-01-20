@@ -7,12 +7,7 @@ const CardsWrapper = () => {
 
     return (
         <div className="CardsWrapper Wrapper">
-            cards wrapper
-            {
-                data.map(el => {
-                    <Card />
-                })
-            }
+            { data.map(item => <Card key={item.id} item={item} />) }
         </div>
     )
 }
