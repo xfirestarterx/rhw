@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <>
-      { !isLoaded && <div>loading</div> }
+      { !isLoaded && <div className="Loader">Loading</div> }
 
       <MainContextProvider updateIsLoaded={updateIsLoaded}>
         <div className="MainContainer">

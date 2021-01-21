@@ -1,12 +1,19 @@
-import React from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import React, { useContext } from 'react';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { MainContext } from '../../context/MainContextProvider';
 
 const Map = withScriptjs(withGoogleMap(() => {
+    const data = useContext(MainContext);
+
     return (
         <GoogleMap
-            defaultZoom={8}
-            defaultCenter={{ lat: -34.397, lng: 150.644 }}
-        ></GoogleMap>
+            defaultZoom={10}
+            defaultCenter={{ lat: 40.716, lng: -74.004 }}
+        >
+            {
+                data.map(({ coordinate: { lat, lon } }) => <Marker position={{ lat, lng: lon }} />)
+            }
+        </GoogleMap>
     );
 }));
 
