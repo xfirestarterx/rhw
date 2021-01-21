@@ -7,6 +7,15 @@
 
 .Wrapper {
     width: 50%;
-    height: 100vh;
-    overflow-y: auto;
+}
+
+.MapWrapper {
+    position: relative;
+}
+
+.Map {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 50%;
 }
